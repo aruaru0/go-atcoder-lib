@@ -1,7 +1,5 @@
 package acl
 
-import "fmt"
-
 //
 // Disjoint Set Union: Union Find Tree
 //
@@ -67,7 +65,6 @@ func (d Dsu) Groups() [][]int {
 			m[x] = append(m[x], i)
 		}
 	}
-	fmt.Println(m)
 	ret := make([][]int, len(m))
 	idx := 0
 	for _, e := range m {
