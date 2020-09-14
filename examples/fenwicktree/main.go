@@ -34,17 +34,20 @@ func main() {
 	sc.Buffer([]byte{}, 1000000)
 	n, q := getInt(), getInt()
 
-	d := acl.Dsu(n)
+	fw := acl.FenwickTree(n)
+	for i := 0; i < n; i++ {
+		a := getInt()
+		fw.Add(i, a)
+	}
+
 	for i := 0; i < q; i++ {
-		t, u, v := getInt(), getInt(), getInt()
+		t := getInt()
 		if t == 0 {
-			d.Merge(u, v)
+			p, x := getInt(), getInt()
+			fw.Add(p, x)
 		} else {
-			if d.Same(u, v) {
-				out("1")
-			} else {
-				out(0)
-			}
+			l, r := getInt(), getInt()
+			out(fw.Sum(l, r))
 		}
 	}
 }

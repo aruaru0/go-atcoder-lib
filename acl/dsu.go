@@ -4,15 +4,15 @@ package acl
 // Disjoint Set Union: Union Find Tree
 //
 
-// Dsu :
-type Dsu struct {
+// DSU :
+type DSU struct {
 	parentOrSize []int
 	n            int
 }
 
-// NewDsu :
-func NewDsu(n int) *Dsu {
-	var d Dsu
+// Dsu :
+func Dsu(n int) *DSU {
+	var d DSU
 	d.n = n
 	d.parentOrSize = make([]int, n)
 	for i := 0; i < n; i++ {
@@ -22,7 +22,7 @@ func NewDsu(n int) *Dsu {
 }
 
 // Merge :
-func (d Dsu) Merge(a, b int) int {
+func (d DSU) Merge(a, b int) int {
 	x, y := d.Leader(a), d.Leader(b)
 	if x == y {
 		return x
@@ -36,12 +36,12 @@ func (d Dsu) Merge(a, b int) int {
 }
 
 // Same :
-func (d Dsu) Same(a, b int) bool {
+func (d DSU) Same(a, b int) bool {
 	return d.Leader(a) == d.Leader(b)
 }
 
 // Leader :
-func (d Dsu) Leader(a int) int {
+func (d DSU) Leader(a int) int {
 	if d.parentOrSize[a] < 0 {
 		return a
 	}
@@ -50,12 +50,12 @@ func (d Dsu) Leader(a int) int {
 }
 
 // Size :
-func (d Dsu) Size(a int) int {
+func (d DSU) Size(a int) int {
 	return -d.parentOrSize[d.Leader(a)]
 }
 
 // Groups : original implement
-func (d Dsu) Groups() [][]int {
+func (d DSU) Groups() [][]int {
 	m := make(map[int][]int)
 	for i := 0; i < d.n; i++ {
 		x := d.Leader(i)
